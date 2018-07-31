@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" 
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:batch="http://www.springframework.org/schema/batch" 
+       xsi:schemaLocation="http://www.springframework.org/schema/beans 
+                        http://www.springframework.org/schema/beans/spring-beans.xsd
+                        http://www.springframework.org/schema/context 
+                        http://www.springframework.org/schema/context/spring-context.xsd
+                        http://www.springframework.org/schema/util 
+                        http://www.springframework.org/schema/util/spring-util.xsd
+                        http://www.springframework.org/schema/batch 
+                        http://www.springframework.org/schema/batch/spring-batch.xsd">                      
+
+    <description>
+    <![CDATA[
+        배치 실행을 위한 기본 설정이 포함되어 있는 파일입니다.
+    ]]>
+    </description>
+          
+    <!--
+        ###############################################
+        Batch IO Helper Configuration 
+        ###############################################
+    -->   
+    <bean id="ioSupport" class="hone.bom.io.support.DefaultIoSupport">
+    <!-- Default 설정  -->
+    </bean>
+    <bean id="ioSupportHolder" class="hone.bom.io.support.IoSupportHolder"/>
+    
+    <bean id="hone.batch.fixedLengthIOFactory" class="hone.bom.batch.runtime.factory.file.FixedLengthFileIOFactory" >
+        <property name="ioSupport" ref="ioSupport"/>
+    </bean>
+    
+    <bean id="hone.batch.delimeterIOFactory" class="hone.bom.batch.runtime.factory.file.DelimeterFileIOFactory" >
+        <property name="ioSupport" ref="ioSupport"/>
+    </bean> 
+    
+    <bean id="hone.batch.defaultDBIOFactory" class="hone.bom.batch.runtime.factory.db.DefaultDBIOFactory" >
+        <property name="ioSupport" ref="ioSupport"/>
+    </bean> 
+    
+    <!--
+        ###############################################
+        Job Launcher Configuration 
+        ###############################################
+    -->     
+    <bean id="jobLauncher" class="org.springframework.batch.core.launch.support.SimpleJobLauncher">
+        <property name="jobRepository" ref="jobRepository" />
+        <property name="taskExecutor">
+            <bean class="org.springframework.core.task.SyncTaskExecutor" />
+        </property>
+    </bean>
+        
+    <bean class="org.springframework.batch.core.scope.StepScope" />
+    
+    <!--
+        ###############################################
+        Base Job Configuration 
+        ###############################################
+    --> 
+        
+    <batch:job id="baseJob" abstract="true" restartable="true" xmlns="http://www.springframework.org/schema/batch">
+        <batch:listeners>
+            <batch:listener ref="jobLoggingListener"/>
+        </batch:listeners>
+    </batch:job> 
+    <bean id="jobLoggingListener" class="hone.bom.batch.runtime.listeners.JobLoggingListener" />
+    
+    <!--
+        ###############################################
+        Base Step Configuration 
+        ###############################################
+    -->     
+    <batch:step id="baseStep" abstract="true" xmlns="http://www.springframework.org/schema/batch">
+        <batch:listeners>
+            <batch:listener ref="stepLoggingListener"/>
+        </batch:listeners>
+    </batch:step>
+    <bean id="stepLoggingListener" class="hone.bom.batch.runtime.listeners.StepLoggingListener" />
+    <bean id="stepLinkListener" class="hone.bom.batch.support.listeners.ExtendedStepExecutionListener" />
+    
+    <bean id="onlineRequestContextGenerator" class="bomnal.framework.batch.BomnalOnlineRequestContextGenerator"/>
+</beans>

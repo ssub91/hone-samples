@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd" >
+<properties>
+
+	<entry key="biz.jdbc.driverClassName">com.tmax.tibero.jdbc.TbDriver</entry>
+	<entry key="biz.jdbc.url">jdbc:tibero:thin:@10.100.10.54:8629:krmadb</entry>
+	<entry key="biz.jdbc.username">KRMA_APP</entry>
+	<entry key="biz.jdbc.password">krmaQwEr</entry>	
+	
+	<!-- Hone F/W 개발 -->
+	<entry key="hone.jdbc.driverClassName">com.tmax.tibero.jdbc.TbDriver</entry>
+	<entry key="hone.jdbc.url">jdbc:tibero:thin:@10.100.10.54:8629:krmadb</entry>
+	<entry key="hone.jdbc.username">KRMA_APP</entry>
+	<entry key="hone.jdbc.password">krmaQwEr</entry>
+	
+</properties>

@@ -1,0 +1,55 @@
+#!/bin/sh
+
+if [ $# -lt 1 ];
+then
+echo "##########################################################################"
+echo "## Usage"
+echo "## runbatch [*JobId] [Job Parameter or Shell Parameter...]"
+echo "## Example"
+echo "## runbatch sampleJob 200010030 HongGildong"
+echo "##########################################################################"
+exit 0
+fi
+
+PGMNM=$1
+
+BATCH_HOME="/home/htest/bomnal/batch"
+BATCH_APP_HOME="/home/htest/bomnal/batch/BATCH-INF"
+
+# batch libraries to java class path
+for filename in $BATCH_APP_HOME/lib/*.jar
+  do
+    CLASS_PATH=${CLASS_PATH}:$filename
+done
+
+export CLASS_PATH=$BATCH_APP_HOME/configs:\
+$BATCH_APP_HOME/classes:\
+$BATCH_APP_HOME/classes-online:\
+$CLASS_PATH
+
+#echo "====== batch class path ======"
+#echo $CLASS_PATH
+
+echo "====== batch job(" $1 ") Started =========="
+
+java \
+  -Xms512m -Xmx1224m \
+  -Dserver.type=batch \
+  -Druntime.mode=DEV \
+  -Dbatch.home=$BATCH_HOME \
+  -DjobConfigClass=bomnal.framework.batch.config.BomnalBatchConfig \
+  -Dlogback.configurationFile=$BATCH_APP_HOME/configs/log/logback.xml \
+  -DjobId=$PGMNM \
+  -classpath $CLASS_PATH \
+hone.bom.batch.support.launch.ExtendedCommandLineJobRunner $*
+
+ret=$?
+if [ $ret -eq 0 ]; then
+echo $ret
+echo "Succ ${PGMNM}"
+exit 0
+else
+echo $ret
+echo "Fail ${PGMNM}"
+exit 1
+fi

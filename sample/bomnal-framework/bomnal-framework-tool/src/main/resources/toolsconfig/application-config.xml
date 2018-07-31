@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context
+		http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/util
+		http://www.springframework.org/schema/util/spring-util.xsd">
+
+
+	<!--
+	<util:properties id="hwgiAdminProp"
+		location="classpath:/hwgi-admin.properties" />
+	-->
+
+	<bean id="jdbcProp"
+		class="org.jasypt.spring31.xml.encryption.EncryptablePropertiesFactoryBean">
+		<property name="encryptor" ref="encryptor"/>
+		<property name="location" value="classpath:/jdbc-properties.xml"/>
+	</bean>
+
+	<alias name="honeDs" alias="dataSource"/>
+
+	<bean id="honeDs" class="org.apache.tomcat.jdbc.pool.DataSource" destroy-method="close">
+		<property name="driverClassName" value="#{jdbcProp['hone.jdbc.driverClassName']}" />
+		<property name="url" value="#{jdbcProp['hone.jdbc.url']}" />
+		<property name="username" value="#{jdbcProp['hone.jdbc.username']}" />
+		<property name="password" value="#{jdbcProp['hone.jdbc.password']}" />
+		<property name="maxActive" value="5" />
+		<property name="maxIdle" value="0" />
+	</bean>
+
+	<bean id="bizDs" class="org.apache.tomcat.jdbc.pool.DataSource" destroy-method="close">
+		<property name="driverClassName" value="#{jdbcProp['biz.jdbc.driverClassName']}" />
+		<property name="url" value="#{jdbcProp['biz.jdbc.url']}" />
+		<property name="username" value="#{jdbcProp['biz.jdbc.username']}" />
+		<property name="password" value="#{jdbcProp['biz.jdbc.password']}" />
+		<property name="maxActive" value="5" />
+		<property name="maxIdle" value="0" />
+	</bean>	
+
+
+
+    <bean id="honeTm" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="honeDs"/>
+    </bean>
+
+    <bean id="bizTm" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="bizDs"/>
+    </bean>
+
+
+</beans>

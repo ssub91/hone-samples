@@ -1,0 +1,9 @@
+{
+  "board" : {
+    "category" : "board",
+    "path" : "/board",
+    "policy" : "MONTH/TIME",
+    "extension" : "png,jpg,gif,doc,docx,ppt,pptx,xls,xlsx,pdf,zip",
+    "desc" : "게시판"
+  }
+}

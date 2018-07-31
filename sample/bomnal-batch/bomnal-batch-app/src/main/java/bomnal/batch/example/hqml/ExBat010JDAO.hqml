@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<hqml xmlns="http://hone.hanwha.co.kr/schema/hqml" name="exBat010JDAO" >
+
+	<!--  -->
+	<statement name="exBat010JDAORead" type="select" isDynamic="false">
+	<![CDATA[
+        SELECT CUST_NO, CUST_NM, ZIP_CD, CUST_ADDR1, CUST_ADDR2, OFF_TEL_DDD1, OFF_TEL1 
+        FROM TEST_CUSTOMER2
+        WHERE CUST_NO LIKE :custNo
+	]]>
+	</statement>
+	
+    	
+</hqml>

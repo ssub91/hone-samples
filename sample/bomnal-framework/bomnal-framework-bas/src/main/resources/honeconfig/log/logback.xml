@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration debug="false" scan="true" scanPeriod="30 seconds">
+    <contextName>HONEBasLog</contextName>
+    <jmxConfigurator/>
+    
+    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+        <!-- encoders are assigned the type
+             ch.qos.logback.classic.encoder.PatternLayoutEncoder by default -->
+        <encoder>
+          <pattern>%d{HH:mm:ss.SSS} [%-5level] [%t] %logger{36} [%file:%line] - %msg%n%ex</pattern>
+        </encoder>
+    </appender>
+    
+    <logger name="jdbc.sql" level="DEBUG"/>
+    <logger name="jdbc.resultset"  level="DEBUG"/>
+    <logger name="org.springframework" level="WARN"/>
+    <logger name="org.apache" level="ERROR"/>
+    <logger name="hone.bom.batch.runtime" level="WARN"/>
+    <logger name="hone.bom.dao.monitor.wrapper" level="WARN"/>
+    <logger name="hone.bom" level="WARN"/>
+    <logger name="hone.bom.rpc" level="DEBUG"/>
+    <logger name="io" level="WARN"/>
+    <logger name="org" level="WARN"/>
+    <logger name="com" level="WARN"/>
+    <logger name="org.apache.http" level="DEBUG"/>
+    
+    <root>
+        <level value="DEBUG"/>
+        <appender-ref ref="console"/>
+    </root>
+
+    
+</configuration>

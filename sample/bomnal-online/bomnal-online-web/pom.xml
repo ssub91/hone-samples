@@ -1,0 +1,110 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<artifactId>bomnal-online-web</artifactId>
+
+	<name>bomnal-online-web</name>
+	<url>http://maven.apache.org</url>
+
+	<parent>
+		<groupId>bomnal</groupId>
+		<artifactId>bomnal</artifactId>
+		<version>1.0.0-SNAPSHOT</version>
+	</parent>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+
+	<dependencies>
+
+		<dependency>
+			<groupId>bomnal.online</groupId>
+			<artifactId>bomnal-online-app</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>bomnal.framework</groupId>
+			<artifactId>bomnal-framework-batch</artifactId>
+			<version>${project.version}</version>
+		</dependency>	
+				
+		<dependency>
+			<groupId>bomnal.framework</groupId>
+			<artifactId>bomnal-framework-test</artifactId>
+			<version>${project.version}</version>
+			<scope>test</scope>
+		</dependency>		
+						
+		<!-- servlet -->
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<version>3.0.1</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>jstl</artifactId>
+			<version>1.2</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet.jsp</groupId>
+			<artifactId>jsp-api</artifactId>
+			<version>2.2</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.12</version>
+			<scope>test</scope>
+		</dependency>
+
+
+	</dependencies>
+
+	<build>
+        <resources>
+            <resource>
+                <directory>src/main/java</directory>
+                <includes>
+                    <include>**/*.hqml</include>
+                </includes>
+            </resource>
+            <resource>
+                <directory>src/main/resources</directory>
+                <includes>
+                    <include>**/*.*</include>
+                </includes>
+            </resource>
+        </resources>
+
+		<finalName>online</finalName>
+		<plugins>
+			<plugin>
+				<artifactId>maven-war-plugin</artifactId>
+				<configuration>
+					<warSourceDirectory>WebContent</warSourceDirectory>
+					<failOnMissingWebXml>WebContent/WEB-INF/web.xml</failOnMissingWebXml>
+				</configuration>
+			</plugin>
+			
+		<!-- 	젠킨스 테스트로 인한 톰켓 플러그인 추가  -->
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>tomcat-maven-plugin</artifactId>
+				<configuration>
+					<url>http://127.0.0.1/manager/text</url>
+					<path>/</path>
+					<username>admin</username>
+					<password>honeadmin</password>
+				</configuration>
+			</plugin>
+			
+		</plugins>
+	</build>
+	<packaging>war</packaging>
+</project>

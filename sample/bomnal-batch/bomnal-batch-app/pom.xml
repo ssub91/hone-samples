@@ -1,0 +1,37 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<artifactId>bomnal-batch-app</artifactId>
+
+	<name>bomnal-batch-app</name>
+	<url>http://maven.apache.org</url>
+
+	<parent>
+		<groupId>bomnal</groupId>
+		<artifactId>bomnal</artifactId>
+		<version>1.0.0-SNAPSHOT</version>
+	</parent>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+
+	<dependencies>
+        <dependency>
+        	<groupId>hone</groupId>
+        	<artifactId>hone-batch-runtime</artifactId>
+        	<version>${hone.version}</version>
+        </dependency>
+        <dependency>
+        	<groupId>hone</groupId>
+        	<artifactId>hone-batch-support</artifactId>
+        	<version>${hone.version}</version>
+        </dependency>
+		<dependency>
+			<groupId>bomnal.framework</groupId>
+			<artifactId>bomnal-framework-test</artifactId>
+			<version>${project.version}</version>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+</project>

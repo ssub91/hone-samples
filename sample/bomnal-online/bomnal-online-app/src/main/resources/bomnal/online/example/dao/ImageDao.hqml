@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<hqml xmlns="http://hone.hanwha.co.kr/schema/hqml" name="bomnal.online.example.dao.ImageDao" >
+	
+	<desc>Image BLOB Sample HQML</desc>
+	
+	<statement name="selectImage" type="select">
+	   <![CDATA[
+	   	 SELECT NO, DATA
+	   	   FROM IMAGE_TABLE
+	   	  WHERE NO = :no
+	    ]]>
+	</statement>
+	 
+	<statement name="insertImage" type="insert">
+	    <![CDATA[
+         INSERT INTO IMAGE_TABLE(
+         		NO,
+         		DATA
+       		) VALUES (
+         	  	IMAGE_TABLE_SEQ.nextval
+         	  	, :data
+            )
+	    ]]>
+	</statement>
+	 
+	<statement name="updateImage" type="udpate">
+	    <![CDATA[
+		 UPDATE IMAGE_TABLE
+		    SET DATA = :data
+		  WHERE NO = :no 
+		]]>
+	</statement>
+	
+	<statement name="deleteImage" type="delete">
+	    <![CDATA[
+		 DELETE
+		   FROM IMAGE_TABLE
+		  WHERE NO = :no 
+		]]>
+	</statement>	
+	
+	
+</hqml>
+

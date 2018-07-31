@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd" >
+<properties>
+	<entry key="hone.test.gathering.log.table">HONE_TEST_GATHERING_LOG</entry>
+	<entry key="hont.test.httpClient.endpoint"></entry>
+</properties>

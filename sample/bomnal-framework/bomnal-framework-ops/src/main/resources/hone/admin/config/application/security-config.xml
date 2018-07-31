@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:util="http://www.springframework.org/schema/util"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/util
+        http://www.springframework.org/schema/util/spring-util.xsd">
+
+    <!-- -->
+    <bean id="userDetailService" class="hone.admin.common.server.user.service.DefaultUserDetailService"/>
+
+    <!--  
+    <util:properties id="hmpProp" location="classpath:properties/hmp-properties.xml" />
+    <bean id="defaultProp"
+        class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+        <property name="propertiesArray">
+            <list>
+                <ref bean="hmpProp" />
+            </list>
+        </property>
+    </bean>
+    <bean id="propertyService" class="hone.bom.commons.property.impl.DefaultPropertyService">
+        <property name="propertiesMap">
+            <map>
+                <entry key="defaultProp" value-ref="defaultProp"/>
+            </map>
+        </property>
+    </bean>
+    <bean id="propertyServiceHolder" class="hone.bom.commons.property.PropertyServiceHolder"/>
+    <import resource="classpath:hmpconfig/ws/ws-general-client.xml"/>
+    <bean id="joltEsbClient" class= "hmp.fw.esb.general.JoltEsbClientImpl">
+        <property name="programIdResolver" ref="programIdResolver"/>
+    </bean>
+    <bean id ="programIdResolver" class="hmp.fw.admin.extensions.online.HmpProgramIdResolver"/>
+
+    <bean id="userDetailService" class="hmp.fw.admin.extensions.online.HmpUserDetailsService"/>
+    <bean id="userDetailsChecker" class="hmp.fw.admin.extensions.online.HmpUserDetailsChecker">
+        <qualifier value="userDetailsChecker"/>
+    </bean>
+    <bean id="loginExpressionUserDetailsChecker" class="hone.admin.common.server.user.service.LoginExpressionUserDetailsChecker">
+        <qualifier value="loginExpressionUserDetailsChecker"/>
+    </bean>
+    -->
+</beans>

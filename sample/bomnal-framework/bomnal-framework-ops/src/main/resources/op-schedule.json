@@ -1,0 +1,7 @@
+{"cronConfig":[
+    {
+        "beanName":"honeLogCleaner"
+        , "methodName":"clean"
+        , "cronExpression":"0 0 23 * * ?"
+    }
+]}

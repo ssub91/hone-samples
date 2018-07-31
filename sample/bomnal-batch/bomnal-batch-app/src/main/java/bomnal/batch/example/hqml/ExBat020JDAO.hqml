@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<hqml xmlns="http://hone.hanwha.co.kr/schema/hqml" name="exBat020JDAO" >
+
+	<statement name="exBat020JDAOWrite" type="insert" isDynamic="false">
+    <![CDATA[
+        INSERT INTO TEST_CUSTOMER3 (CUST_NO, CUST_NM, ZIP_CD, CUST_ADDR1, CUST_ADDR2, OFF_TEL_DDD1, OFF_TEL1)
+        VALUES (:custNo, :custNm, :zipCd, :custAddr1, :custAddr2, :offTelDdd1, :offTel1) 
+    ]]>
+    </statement>	
+	
+    <!--  -->
+    	
+</hqml>

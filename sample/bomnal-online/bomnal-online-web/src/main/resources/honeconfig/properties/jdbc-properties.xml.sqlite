@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd" >
+<properties>
+
+	<entry key="biz.jdbc.driverClassName">org.sqlite.JDBC</entry>
+	<entry key="biz.jdbc.url">jdbc:sqlite::memory:</entry>
+	<entry key="biz.jdbc.username">sa</entry>
+	<entry key="biz.jdbc.password">sa</entry>	
+	
+	<entry key="hone.jdbc.driverClassName">org.sqlite.JDBC</entry>
+	<entry key="hone.jdbc.url">jdbc:sqlite::memory:</entry>
+	<entry key="hone.jdbc.username">sa</entry>
+	<entry key="hone.jdbc.password">sa</entry>
+
+	<entry key="hone.log.jdbc.driverClassName">org.sqlite.JDBC</entry>
+	<entry key="hone.log.jdbc.url">jdbc:sqlite::memory:</entry>
+	<entry key="hone.log.jdbc.username">sa</entry>
+	<entry key="hone.log.jdbc.password">sa</entry>
+
+</properties>

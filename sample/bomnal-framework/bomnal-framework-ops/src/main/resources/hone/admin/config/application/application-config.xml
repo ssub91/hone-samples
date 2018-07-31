@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:jee="http://www.springframework.org/schema/jee"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context
+		http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/jee
+		http://www.springframework.org/schema/jee/spring-jee.xsd
+		http://www.springframework.org/schema/util
+		http://www.springframework.org/schema/util/spring-util.xsd">
+
+
+	<util:properties id="honeAdminProp"
+		location="classpath:/hone-admin.properties" />
+
+	<!--
+	<util:properties id="hwgiAdminProp"
+		location="classpath:/hwgi-admin.properties" />
+	-->
+
+	<bean id="jdbcProp"
+		class="org.jasypt.spring31.xml.encryption.EncryptablePropertiesFactoryBean">
+		<property name="encryptor" ref="encryptor"/>
+		<property name="location" value="classpath:/properties/jdbc-properties.xml"/>
+	</bean>
+
+	<alias name="honeDs" alias="dataSource"/>
+
+    <bean id="honeDs" class="org.apache.tomcat.jdbc.pool.DataSource" destroy-method="close">
+        <property name="driverClassName" value="#{jdbcProp['hone.jdbc.driverClassName']}" />
+        <property name="url" value="#{jdbcProp['hone.jdbc.url']}" />
+        <property name="username" value="#{jdbcProp['hone.jdbc.username']}" />
+        <property name="password" value="#{jdbcProp['hone.jdbc.password']}" />
+        <property name="maxActive" value="5" />
+        <property name="maxIdle" value="0" />
+    </bean>
+    
+    <bean id="honeLogDs" class="org.apache.tomcat.jdbc.pool.DataSource" destroy-method="close">
+        <property name="driverClassName" value="#{jdbcProp['hone.log.jdbc.driverClassName']}" />
+        <property name="url" value="#{jdbcProp['hone.log.jdbc.url']}" />
+        <property name="username" value="#{jdbcProp['hone.log.jdbc.username']}" />
+        <property name="password" value="#{jdbcProp['hone.log.jdbc.password']}" />
+        <property name="maxActive" value="5" />
+        <property name="maxIdle" value="0" />
+    </bean>
+    
+	<bean id="pageQueryBuilder" class="hone.admin.base.paging.OraclePagingQueryBuilder"/>
+	<bean class="hone.bom.dao.key.sequence.support.oracle.OracleSequenceDaoImpl">
+		<property name="dataSource" ref="dataSource"/>
+	</bean>
+
+
+	<!--
+	<context:component-scan base-package="hwgi.pci.admin.extensions.*" use-default-filters="false">
+	   	 	<context:include-filter type="annotation" expression="org.springframework.stereotype.Component"/>
+	</context:component-scan>
+
+	<util:list id="voClassPath">
+	</util:list>
+	-->
+
+</beans>

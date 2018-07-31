@@ -1,0 +1,11 @@
+/.settings/
+/.project
+**/.settings/
+**/.project
+**/.classpath
+<<<<<<< HEAD
+**/target/
+/.DS_Store
+=======
+**/target/
+>>>>>>> branch 'master' of https://github.com/ssub91/hone-samples.git

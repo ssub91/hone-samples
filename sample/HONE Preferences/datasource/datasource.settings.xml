@@ -1,0 +1,29 @@
+<com.hanwha.hone.datasource.model.DataSourceConfigModel>
+  <profileList>
+    <com.hanwha.hone.datasource.model.DataSourceConfigProfileModel>
+<<<<<<< HEAD
+      <name>bomnalDevDataSource</name>
+      <connectionInfo>
+        <providerId>OracleMetadataProvider</providerId>
+        <properties>
+          <property name="jdbcLibPath" value="ojdbc6-11.2.0.4.jar"/>
+          <property name="user" value="HONE4"/>
+          <property name="url" value="jdbc:oracle:thin:@127.0.0.1:1521:xe"/>
+          <property name="password" value="hone4"/>
+          <property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>
+=======
+      <name>krmaDevDataSource</name>
+      <connectionInfo>
+        <providerId>OracleMetadataProvider</providerId>
+        <properties>
+          <property name="jdbcLibPath" value="tibero6-jdbc.jar"/>
+          <property name="user" value="DEV_KRMA_LEG"/>
+          <property name="url" value="jdbc:tibero:thin:@10.100.10.62:8629:krmadb"/>
+          <property name="password" value="DEV_KRMA_LEG"/>
+          <property name="driverClassName" value="com.tmax.tibero.jdbc.TbDriver"/>
+>>>>>>> branch 'master' of https://github.com/ssub91/hone-samples.git
+        </properties>
+      </connectionInfo>
+    </com.hanwha.hone.datasource.model.DataSourceConfigProfileModel>
+  </profileList>
+</com.hanwha.hone.datasource.model.DataSourceConfigModel>

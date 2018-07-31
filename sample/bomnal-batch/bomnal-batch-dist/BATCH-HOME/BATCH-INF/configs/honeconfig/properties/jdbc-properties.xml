@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd" >
+<properties>
+
+	<entry key="biz.jdbc.driverClassName">oracle.jdbc.driver.OracleDriver</entry>
+	<entry key="biz.jdbc.url">jdbc:oracle:thin:@172.16.1.40:1521:HONE</entry>
+	<entry key="biz.jdbc.username">hone4</entry>
+	<entry key="biz.jdbc.password">hone4</entry>	
+	
+	<entry key="hone.jdbc.driverClassName">oracle.jdbc.driver.OracleDriver</entry>
+	<entry key="hone.jdbc.url">jdbc:oracle:thin:@172.16.1.40:1521:HONE</entry>
+	<entry key="hone.jdbc.username">hone4</entry>
+	<entry key="hone.jdbc.password">hone4</entry>	
+	
+	<entry key="hone.log.jdbc.driverClassName">oracle.jdbc.driver.OracleDriver</entry>
+	<entry key="hone.log.jdbc.url">jdbc:oracle:thin:@172.16.1.40:1521:HONE</entry>
+	<entry key="hone.log.jdbc.username">hone4</entry>
+	<entry key="hone.log.jdbc.password">hone4</entry>
+
+</properties>

@@ -1,0 +1,71 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	
+	<artifactId>bomnal-framework-bas</artifactId>
+	<packaging>war</packaging>
+		
+	<name>bomnal-framework-bas</name>
+	
+	<parent>
+		<groupId>bomnal.framework</groupId>
+		<artifactId>bomnal-framework</artifactId>
+		<version>1.0.0-SNAPSHOT</version>
+	</parent>
+
+	<dependencies>
+		<dependency>
+			<groupId>bomnal.framework</groupId>
+			<artifactId>bomnal-framework-batch</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>hone</groupId>
+			<artifactId>hone-rpc</artifactId>
+			<version>${hone.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>io.netty</groupId>
+			<artifactId>netty-all</artifactId>
+		</dependency>	
+		<dependency>
+			<groupId>org.apache.tomcat</groupId>
+			<artifactId>tomcat-jdbc</artifactId>
+			<version>7.0.64</version>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>servlet-api</artifactId>
+			<version>2.5</version>
+<<<<<<< HEAD
+		</dependency>
+		<dependency>
+		  <groupId>thirdparty.oracle</groupId>
+		  <artifactId>ojdbc6</artifactId>
+		  <version>11.2.0.4</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>bomnal</groupId>
+			<artifactId>bomnal-batch-app</artifactId>
+			<version>${project.version}</version>
+		</dependency>												
+=======
+		</dependency>						
+>>>>>>> branch 'master' of https://github.com/ssub91/hone-samples.git
+	</dependencies>
+
+	<build>
+		<finalName>honebas</finalName>
+		<plugins>
+			<plugin>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>2.4</version>
+				<configuration>
+					<warSourceDirectory>WebContent</warSourceDirectory>
+					<failOnMissingWebXml>false</failOnMissingWebXml>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>       	
+</project>

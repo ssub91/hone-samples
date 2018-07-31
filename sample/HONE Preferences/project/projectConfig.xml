@@ -1,0 +1,10 @@
+<projectConfig>
+	<packageRoot>src/main/java</packageRoot>
+<<<<<<< HEAD
+	<sqliteDbPath>Y:\workspaces\stash\hone4-wintest\hone-samples\sample\HONE Preferences\meta\worddictionary\sqlite.db</sqliteDbPath>
+	<defaultDtoInterface>hone.bom.web.simple.dto.SerializableDto</defaultDtoInterface>
+=======
+	<sqliteDbPath>C:\KRMADEV\workspace\HONE Preferences\meta\worddictionary\sqlite.db</sqliteDbPath>
+	<defaultDtoInterface>krma.framework.online.core.vo.SerializableVo</defaultDtoInterface>
+>>>>>>> branch 'master' of https://github.com/ssub91/hone-samples.git
+</projectConfig>

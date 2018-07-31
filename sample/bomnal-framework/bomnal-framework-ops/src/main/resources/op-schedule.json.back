@@ -1,0 +1,7 @@
+{"cronConfig":[
+    {
+        "beanName":"logTruncate"
+        , "methodName":"truncate"
+        , "cronExpression":"0 0 23 * * ?"
+    }
+]}

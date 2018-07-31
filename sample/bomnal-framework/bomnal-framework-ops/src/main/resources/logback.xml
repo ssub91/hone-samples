@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration debug="false" packagingData="false" scan="true" scanPeriod="30 seconds">
+    <contextName>HONE-OP</contextName>
+    <jmxConfigurator />
+
+    <statusListener class="ch.qos.logback.core.status.OnConsoleStatusListener" />
+
+    <contextListener class="ch.qos.logback.classic.jul.LevelChangePropagator">
+        <resetJUL>true</resetJUL>
+    </contextListener>
+
+    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>[%d{yyyy.MM.dd HH:mm:ss.SSS}][%-5level] %logger{36} [%file:%line] -%msg%n%ex</pattern>
+        </encoder>
+    </appender>
+
+	<logger name="org.springframework" level="ERROR"/>
+	<logger name="org" level="ERROR"/>
+	<logger name="com" level="ERROR"/>
+	<logger name="io.netty" level="ERROR"/>
+	<logger name="krma" level="INFO"/>
+	<logger name="hone.bom.scheduling" level="INFO"/>
+
+    <root level="DEBUG">
+        <appender-ref ref="console"/>
+    </root>
+
+</configuration>

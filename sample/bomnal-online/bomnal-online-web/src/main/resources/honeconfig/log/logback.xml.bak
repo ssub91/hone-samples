@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration debug="true" scan="true" scanPeriod="30 seconds">
+	<contextName>Web Configuration</contextName>
+	<jmxConfigurator />
+
+	<appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+		<layout class="ch.qos.logback.classic.PatternLayout">
+			<pattern>[%d{HH:mm:ss.SSS}] [%thread] [%-5level] %logger{36} [%file:%line] | %msg%n%ex</pattern>
+		</layout>
+	</appender>
+
+    <appender name="MSG_DB" class="hone.bom.log.BomBatchDBAppender">
+        <LoggingPolicy class="hone.bom.web.log.MessageDBLoggingPolicy"></LoggingPolicy>
+        <!--  
+        <connectionSource class="ch.qos.logback.core.db.JNDIConnectionSource">
+            <jndiLocation>honeDB</jndiLocation>
+        </connectionSource>
+        -->
+        <connectionSource class="ch.qos.logback.core.db.DriverManagerConnectionSource">
+                <driverClass>oracle.jdbc.driver.OracleDriver</driverClass>
+                <url>jdbc:oracle:thin:@127.0.0.1:1521:xe</url>
+                <user>hone4</user>
+                <password>hone4</password>
+        </connectionSource>        
+    </appender>
+
+    <appender name="REQ_DB" class="hone.bom.log.BomBatchDBAppender">
+        <LoggingPolicy class="hone.bom.web.log.RequestDBLoggingPolicy"></LoggingPolicy>
+        <filter class="hone.bom.log.PositionFilter">
+            <Accepted>FRT.TX_END</Accepted>
+        </filter>
+        <!--  
+        <connectionSource class="ch.qos.logback.core.db.JNDIConnectionSource">
+            <jndiLocation>honeDB</jndiLocation>
+        </connectionSource>
+        -->
+        <connectionSource class="ch.qos.logback.core.db.DriverManagerConnectionSource">
+                <driverClass>oracle.jdbc.driver.OracleDriver</driverClass>
+                <url>jdbc:oracle:thin:@127.0.0.1:1521:xe</url>
+                <user>hone4</user>
+                <password>hone4</password>
+        </connectionSource>
+    </appender>
+
+    <appender name="ERROR_DB" class="hone.bom.log.BomBatchDBAppender">
+        <LoggingPolicy class="hone.bom.web.log.ErrorDBLoggingPolicy"></LoggingPolicy>
+        <filter class="hone.bom.log.ErrorFilter"></filter>
+        <!--  
+        <connectionSource class="ch.qos.logback.core.db.JNDIConnectionSource">
+            <jndiLocation>honeDB</jndiLocation>
+        </connectionSource>
+        -->
+        <connectionSource class="ch.qos.logback.core.db.DriverManagerConnectionSource">
+                <driverClass>oracle.jdbc.driver.OracleDriver</driverClass>
+                <url>jdbc:oracle:thin:@127.0.0.1:1521:xe</url>
+                <user>hone4</user>
+                <password>hone4</password>
+        </connectionSource>
+    </appender>
+    <appender name="TRACE_DB" class="hone.bom.log.BomBatchDBAppender">
+        <LoggingPolicy class="hone.bom.web.log.TraceDBLoggingPolicy"></LoggingPolicy>
+        <!--  
+        <connectionSource class="ch.qos.logback.core.db.JNDIConnectionSource">
+            <jndiLocation>honeDB</jndiLocation>
+        </connectionSource>
+        -->
+        <connectionSource class="ch.qos.logback.core.db.DriverManagerConnectionSource">
+                <driverClass>oracle.jdbc.driver.OracleDriver</driverClass>
+                <url>jdbc:oracle:thin:@127.0.0.1:1521:xe</url>
+                <user>hone4</user>
+                <password>hone4</password>
+        </connectionSource>
+    </appender>
+
+    <appender name="SERVICE_DB" class="hone.bom.log.BomBatchDBAppender">
+        <LoggingPolicy class="hone.bom.web.log.ServiceDBLoggingPolicy"></LoggingPolicy>
+        <filter class="hone.bom.web.log.filter.MDCFilter">
+            <Accepted>requestId,serviceId</Accepted>
+        </filter>
+        <!--  
+        <connectionSource class="ch.qos.logback.core.db.JNDIConnectionSource">
+            <jndiLocation>honeDB</jndiLocation>
+        </connectionSource>
+        -->
+        <connectionSource class="ch.qos.logback.core.db.DriverManagerConnectionSource">
+                <driverClass>oracle.jdbc.driver.OracleDriver</driverClass>
+                <url>jdbc:oracle:thin:@127.0.0.1:1521:xe</url>
+                <user>hone4</user>
+                <password>hone4</password>
+        </connectionSource>
+    </appender>
+
+    <appender name="ASYNC_MSG_DB" class="ch.qos.logback.classic.AsyncAppender">
+        <queueSize>2048</queueSize>
+        <appender-ref ref="MSG_DB" />
+    </appender>
+
+    <appender name="ASYNC_REQ_DB" class="ch.qos.logback.classic.AsyncAppender">
+        <queueSize>4096</queueSize>
+        <appender-ref ref="REQ_DB" />
+    </appender>
+
+    <appender name="ASYNC_ERROR_DB" class="ch.qos.logback.classic.AsyncAppender">
+        <queueSize>4096</queueSize>
+        <appender-ref ref="ERROR_DB" />
+    </appender>
+    <appender name="ASYNC_TRACE_DB" class="ch.qos.logback.classic.AsyncAppender">
+        <queueSize>4096</queueSize>
+        <appender-ref ref="TRACE_DB" />
+    </appender>
+    <appender name="ASYNC_SERVICE_DB" class="ch.qos.logback.classic.AsyncAppender">
+        <queueSize>4096</queueSize>
+        <appender-ref ref="SERVICE_DB" />
+    </appender>
+
+    <logger name="hone.log.message" level="WARN" additivity="false">
+        <appender-ref ref="file" />
+        <appender-ref ref="ASYNC_MSG_DB" />
+    </logger>
+    <logger name="hone.log.request" level="WARN" additivity="false">
+        <appender-ref ref="file" />
+        <appender-ref ref="file-request" />
+        <appender-ref ref="ASYNC_REQ_DB" />
+    </logger>
+    <logger name="hone.log.error" level="ERROR" additivity="false">
+        <appender-ref ref="file" />
+        <appender-ref ref="ASYNC_ERROR_DB" />
+    </logger>
+    <logger name="hone.log.trace" level="WARN" additivity="false">
+        <appender-ref ref="file" />
+        <appender-ref ref="ASYNC_TRACE_DB" />
+    </logger>   
+
+	<logger name="org.springframework" level="WARN" />
+	<logger name="org.springframework.security" level="WARN" />
+	<logger name="org" level="ERROR" />
+	<logger name="io" level="ERROR" />
+	<logger name="hone" level="ERROR" />
+ 	<logger name="jdbc.sql" level="DEBUG" />
+ 	<logger name="jdbc.resultset" level="DEBUG" />
+
+	<root level="DEBUG">
+		<appender-ref ref="console" />
+		<appender-ref ref="ASYNC_SERVICE_DB" />
+	</root>
+
+</configuration>

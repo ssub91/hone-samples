@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="Batch Project Core Build" basedir="." default="deploy" xmlns:artifact="antlib:org.apache.maven.artifact.ant">
+	<description>
+		<![CDATA[ANT Buile Task]]>
+	</description>
+
+	<path id="maven-ant-tasks.classpath" path="lib/maven-ant-tasks-2.1.3.jar" />
+	<typedef resource="org/apache/maven/artifact/ant/antlib.xml" uri="antlib:org.apache.maven.artifact.ant" classpathref="maven-ant-tasks.classpath" />
+
+	<property file="ant-build.properties" />
+
+	<!--
+	###############################################
+	# WEB용 공통스크립트 배포
+	###############################################
+	-->
+	<target name="deploy">
+		<antcall target="copy-batch-resources" />
+	</target>
+	
+	<target name="copy-batch-resources">
+		<copy toDir="${batch.home}/BATCH-INF/classes/" overwrite="true" force="true" verbose="true">
+			<fileset dir="../target/classes/">
+			</fileset>
+		</copy>
+	</target>
+</project>

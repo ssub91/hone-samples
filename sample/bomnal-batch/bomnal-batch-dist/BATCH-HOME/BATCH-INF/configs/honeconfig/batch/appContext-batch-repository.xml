@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+    xmlns:p="http://www.springframework.org/schema/p" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+    <description>
+    <![CDATA[
+        메모리 기반 배치 레파지토리 설정이  포함되어 있는 파일입니다.
+    ]]>
+    </description>
+    
+
+     <!--
+        ###############################################
+        Job Repository Configuration 
+        ###############################################
+    --> 
+    <bean id="jobRepository" class="org.springframework.batch.core.repository.support.JobRepositoryFactoryBean" lazy-init="true">
+      <property name="dataSource" ref="honeDataSource" />
+      <property name="transactionManager" ref="honeTransactionManager"/>
+      <property name="databaseType" value="oracle" />
+      <property name="isolationLevelForCreate" value="ISOLATION_DEFAULT" />
+      <property name="tablePrefix" value="HONE_" />
+    </bean>
+
+     <!--
+        ###############################################
+        Batch Repository Configuration 
+        ###############################################
+    -->
+    <bean id="hone.batch.registry" class="hone.bom.batch.support.registry.DatabaseBatchRegistry" >
+        <property name="dataSource" ref="honeDataSource" />
+    </bean>
+
+     <!--
+        ###############################################
+        Job Info Dao Configuration 
+        ###############################################
+    -->
+    <bean id="hone.batch.jobDao" class="hone.bom.batch.support.registry.JobDao" >
+        <property name="dataSource" ref="honeDataSource"/>
+    </bean> 
+        
+  
+    
+</beans>

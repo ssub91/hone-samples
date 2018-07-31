@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd" >
+<properties>
+    <entry key="hone.security.session.maximumSessions">1</entry>
+    <entry key="hone.web.transactionControl">true</entry>
+    <entry key="hone.web.transactionControl.forced">false</entry>
+    <!--  
+	<entry key="hone.requestcontext.classname">hone.bom.context.request.RequestContext</entry>
+	-->
+	<entry key="hone.systemheader.classname">hone.bom.web.simple.message.DefaultMessageHeader</entry>
+	<entry key="hone.monitor.control.services.exceptionClass">hone.bom.BomException</entry>
+	<entry key="hone.monitor.control.services.idBaseExceptionClass">hone.bom.CodedBomException</entry>
+	<entry key="hone.log.data.gathering">true</entry>
+	<entry key="hone.log.data.encrypt">false</entry>
+	<entry key="hone.log.data.mode">BOTH</entry>
+	<entry key="hone.online.instance.baseUrl"></entry>
+	<entry key="hone.common.config.systemConfigType">default</entry>
+</properties>

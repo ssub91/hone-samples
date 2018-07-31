@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<hqml xmlns="http://hone.hanwha.co.kr/schema/hqml" name="bomnal.online.example.dao.MemoDao" >
+	<desc>Memo Sample HQML</desc>
+	<statement name="selectMemo" type="select"><![CDATA[
+ SELECT
+     MEMO_ID
+     , MEMO_TITLE
+     , MEMO_CONTENT
+     , REG_ID
+     , REG_DATE
+ FROM HONE_SAMPLE_MEMO
+ WHERE
+     MEMO_ID = :memoId
+     
+     
+	    ]]></statement>
+
+	<statement name="selectMemoCount" type="select">
+	    <![CDATA[
+ SELECT count( 1 ) AS totalCount
+ FROM HONE_SAMPLE_MEMO 
+ WHERE 1=1
+     <#if memoId?has_content >AND MEMO_ID LIKE '%'|| :memoId||'%' </#if>
+     <#if memoTitle?has_content >AND MEMO_TITLE LIKE '%'|| :memoTitle||'%' </#if>
+     <#if memoContent?has_content >AND MEMO_CONTENT LIKE '%'|| :memoContent||'%' </#if>
+     <#if regId?has_content >AND REG_ID LIKE '%'|| :regId||'%' </#if>
+     <#if regDate?has_content >AND REG_DATE LIKE '%'|| :regDate||'%' </#if>
+	    ]]>
+	</statement>	
+		 
+	<statement name="selectMemoList" type="select">
+	    <![CDATA[
+ SELECT * FROM ( 
+     SELECT Result.*, ROWNUM RN FROM ( 
+         SELECT
+             MEMO_ID
+             , MEMO_TITLE
+             , MEMO_CONTENT
+             , REG_ID
+             , REG_DATE
+         FROM HONE_SAMPLE_MEMO
+         WHERE 1=1 
+             <#if memoId?has_content >AND MEMO_ID LIKE '%'|| :memoId||'%' </#if>
+             <#if memoTitle?has_content >AND MEMO_TITLE LIKE '%'|| :memoTitle||'%' </#if>
+             <#if memoContent?has_content >AND MEMO_CONTENT LIKE '%'|| :memoContent||'%' </#if>
+             <#if regId?has_content >AND REG_ID LIKE '%'|| :regId||'%' </#if>
+             <#if regDate?has_content >AND REG_DATE LIKE '%'|| :regDate||'%' </#if>
+         ORDER BY <@orderBy append="true" colon="after"/> ROWID
+     ) Result WHERE ROWNUM <= :maxNum 
+ ) WHERE RN > :offsetNum
+	    ]]>
+	</statement>	
+	 
+	<statement name="insertMemo" type="insert">
+	    <![CDATA[
+ INSERT INTO HONE_SAMPLE_MEMO (
+     MEMO_ID
+     , MEMO_TITLE
+     , MEMO_CONTENT
+     , REG_ID
+     , REG_DATE
+ ) VALUES (
+     :memoId
+     , :memoTitle
+     , :memoContent
+     , :regId
+     , :regDate
+ )
+	    ]]>
+	</statement>
+	
+	<statement name="updateMemo" type="update"><![CDATA[
+ UPDATE HONE_SAMPLE_MEMO 
+ SET
+     MEMO_TITLE = :memoTitle
+     , MEMO_CONTENT = :memoContent
+     , REG_ID = :regId
+     , REG_DATE = :regDate
+ WHERE
+     MEMO_ID = :memoId
+     
+	    ]]></statement>
+	
+	<statement name="deleteMemo" type="insert">
+	    <![CDATA[
+ DELETE 
+ FROM HONE_SAMPLE_MEMO 
+ WHERE 
+     MEMO_ID = :memoId
+	    ]]>
+	</statement>
+	
+<statement name="selectMemo1" type="select"><![CDATA[SELECT 
+	MEMO_ID,
+	MEMO_TITLE
+FROM HONE_SAMPLE_MEMO
+WHERE 
+	MEMO_ID = :memoId
+	]]></statement></hqml>

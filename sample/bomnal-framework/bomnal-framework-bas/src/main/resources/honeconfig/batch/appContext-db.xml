@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:p="http://www.springframework.org/schema/p"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:jee="http://www.springframework.org/schema/jee"
+    xmlns:tx="http://www.springframework.org/schema/tx"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.1.xsd
+        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.1.xsd
+        http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.1.xsd">
+
+    <bean id="datasourceInterceptor" class="hone.bom.dao.monitor.inteceptor.DataSourceInterceptor"/>
+    <bean class="hone.bom.dao.monitor.inteceptor.DataSourceBeanNameAutoProxyCreator">
+        <property name="beanNames">
+            <list>
+                <!--  
+                <value>bizDataSource</value>
+                -->
+                <value>honeDataSource</value>
+            </list>
+        </property>
+        <property name="interceptorNames">
+            <list>
+                <value>datasourceInterceptor</value>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="bizDataSource" class="org.apache.tomcat.jdbc.pool.DataSource"
+        destroy-method="close">
+        <property name="driverClassName" value="#{jdbcProp['biz.jdbc.driverClassName']}" />
+        <property name="url" value="#{jdbcProp['biz.jdbc.url']}" />
+        <property name="username" value="#{jdbcProp['biz.jdbc.username']}" />
+        <property name="password" value="#{jdbcProp['biz.jdbc.password']}" />
+    </bean>
+    
+
+    <bean id="honeDataSource" class="org.apache.tomcat.jdbc.pool.DataSource"
+        destroy-method="close">
+        <property name="driverClassName" value="#{jdbcProp['hone.jdbc.driverClassName']}" />
+        <property name="url" value="#{jdbcProp['hone.jdbc.url']}" />
+        <property name="username" value="#{jdbcProp['hone.jdbc.username']}" />
+        <property name="password" value="#{jdbcProp['hone.jdbc.password']}" />
+        <property name="maxActive" value="3"/>
+        <property name="maxIdle" value="0"/>
+    </bean>
+
+    <alias name="bizDataSource" alias="sessionRepositoryDataSource"/>
+    <alias name="bizDataSource" alias="dataSource"/>
+    <alias name="honeDataSource" alias="messageDataSource"/>
+
+</beans>

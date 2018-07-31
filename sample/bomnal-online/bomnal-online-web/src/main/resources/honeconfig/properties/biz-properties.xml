@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd" >
+<properties>
+    <entry key="common.eai.server.ip">000.000.000.000</entry>
+    <entry key="common.eai.server.port">0000</entry>
+</properties>

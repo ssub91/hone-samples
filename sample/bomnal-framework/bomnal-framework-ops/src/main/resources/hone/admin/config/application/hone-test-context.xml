@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:p="http://www.springframework.org/schema/p" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+       	http://www.springframework.org/schema/beans/spring-beans.xsd
+       	http://www.springframework.org/schema/context
+       	http://www.springframework.org/schema/context/spring-context.xsd
+       	http://www.springframework.org/schema/mvc
+		http://www.springframework.org/schema/mvc/spring-mvc.xsd
+		http://www.springframework.org/schema/aop
+		http://www.springframework.org/schema/aop/spring-aop.xsd
+		http://www.springframework.org/schema/util
+		http://www.springframework.org/schema/util/spring-util.xsd">
+
+	<!-- ############################################### Properties Configuration
+		############################################### -->
+	<util:properties id="honeTestProp"
+		location="classpath:/properties/hone-test-properties.xml" />
+
+	<bean id="defaultProp"
+		class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+		<property name="propertiesArray">
+			<list>
+				<ref bean="honeTestProp" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="testCaseDao" class="hone.bom.test.core.dao.TestCaseDao"></bean>
+
+	<!-- hone-test 컴포넌트에서 transactionManager이름으로 빈을 가져오는 문제 때문에 임시로 대처함. -->
+	<!--
+	<alias name="honeTransactionManager" alias="transactionManager"/>
+	-->
+</beans>

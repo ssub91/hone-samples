@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<hqml xmlns="http://hone.hanwha.co.kr/schema/hqml" name="bomnal.online.example.dao.GuestbookDao" >
+	<desc>Guestbook Sample HQML</desc>
+	
+	
+	<statement name="detailGuestbook" type="select">
+	   <![CDATA[
+		 SELECT * 
+		   FROM GUESTBOOK
+		  WHERE NO = :no
+	    ]]></statement>
+
+	<statement name="selectGuestbookCount" type="select">
+      <![CDATA[
+		 SELECT count( no ) AS totalCount
+		   FROM GUESTBOOK 
+		  WHERE 1=1
+		     <#if no?has_content >AND NO LIKE '%'|| :no||'%' </#if>
+		     <#if password?has_content >AND PASSWORD LIKE '%'|| :password||'%' </#if>
+		     <#if content?has_content >AND CONTENT LIKE '%'|| :content||'%' </#if>
+		     <#if reg_date?has_content >AND REG_DATE LIKE '%'|| :reg_date||'%' </#if>
+	   ]]>
+	</statement>	
+		 
+	<statement name="getGuestbookList" type="select">
+	    <![CDATA[
+		 SELECT * 
+		   FROM ( 
+			     SELECT Result.*, ROWNUM RN 
+			       FROM ( 
+						  SELECT NO, 
+							     NAME, 
+							     PASSWORD, 
+							     CONTENT,
+							     TO_CHAR(REG_DATE, 'yyyy-mm-dd hh:mi:ss') 
+						    FROM GUESTBOOK
+						    WHERE 1=1
+						     <#if no?has_content >AND NO LIKE '%'|| :no||'%' </#if>
+						     <#if password?has_content >AND PASSWORD LIKE '%'|| :password||'%' </#if>
+						     <#if content?has_content >AND CONTENT LIKE '%'|| :content||'%' </#if>
+						     <#if reg_date?has_content >AND REG_DATE LIKE '%'|| :reg_date||'%' </#if>
+			    		ORDER BY REG_DATE DESC
+			     ) Result WHERE ROWNUM <= :maxNum 
+		 ) WHERE RN > :offsetNum
+	    ]]>
+	</statement>	
+	 
+	<statement name="insertGuestbook" type="insert">
+	    <![CDATA[
+		 INSERT INTO GUESTBOOK (
+			     NO
+			     , NAME
+			     , PASSWORD
+			     , CONTENT
+			     , REG_DATE
+			     , BLOB_NAME
+			     , BLOB_FILE
+			 ) VALUES (
+			     :no
+			     , :name
+			     , :password
+			     , :content
+			     , sysdate
+			     , :blob_name
+			     , :blob_file
+			 )
+	    ]]>
+	</statement>
+	
+
+	 
+	<statement name="updateGuestbook" type="udpate">
+	    <![CDATA[
+		  UPDATE GUESTBOOK 
+		     SET name = :name,
+		         password = :password,
+		         content = :content
+		   WHERE no = :no 
+			    ]]>
+	</statement>
+	
+	
+		 
+ 	<statement name="deleteGuestbook" type="insert">
+	    <![CDATA[
+		  DELETE FROM GUESTBOOK 
+		        WHERE no = :no 
+	     ]]>
+	</statement>
+
+
+	
+	<statement name="getGuestBookIn" type="select">
+	   <![CDATA[
+		 SELECT no, name, content
+		   FROM GUESTBOOK
+		  WHERE 1=1
+		 <#if nameList?has_content >
+		  AND name in (:nameList)
+		 </#if>
+	    ]]></statement>
+
+
+	<statement name="getGuestBookCase" type="select">
+	   <![CDATA[
+		 SELECT no, name, content
+		   FROM GUESTBOOK
+		   WHERE 1=1
+       <#if year??>
+	     <#if year =='2016'>
+		  AND REG_DATE BETWEEN TO_DATE('2016/01/01 00:00:00' ,'YYYY/MM/DD HH24:MI:SS') AND TO_DATE('2016/12/31 23:59:59' ,'YYYY/MM/DD HH24:MI:SS')  
+		 <#elseif year =='2017'>
+		  AND REG_DATE BETWEEN TO_DATE('2017/01/01 00:00:00' ,'YYYY/MM/DD HH24:MI:SS') AND TO_DATE('2017/12/31 23:59:59' ,'YYYY/MM/DD HH24:MI:SS')  
+		 <#else>
+		  AND REG_DATE BETWEEN TO_DATE('2018/01/01 00:00:00' ,'YYYY/MM/DD HH24:MI:SS') AND TO_DATE('2018/12/31 23:59:59' ,'YYYY/MM/DD HH24:MI:SS')
+		  </#if>
+	   </#if>
+	    ]]></statement>
+
+
+	</hqml>
+

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<hqml xmlns="http://hone.hanwha.co.kr/schema/hqml" name="ssubBatchDAO" >
+
+	<statement name="ssubBatchDAORead" type="select" isDynamic="false">
+	<![CDATA[
+        SELECT NO, FIRST_NAME, LAST_NAME 
+        FROM PERSON
+        WHERE FIRST_NAME LIKE :firstName
+	]]>
+	</statement>
+	
+	<statement name="ssubBatchDAOInsert" type="select" isDynamic="false">
+	<![CDATA[
+        INSERT INTO PEOPLE
+        VALUES( PEOPLE_SEQ.nextval, :fullName )
+	]]>
+	</statement>	
+    	
+</hqml>
+

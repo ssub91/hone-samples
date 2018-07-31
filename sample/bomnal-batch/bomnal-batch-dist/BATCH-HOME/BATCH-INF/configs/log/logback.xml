@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration debug="false" scan="true" scanPeriod="30 seconds">
+    <contextName>BomnalBatchLog</contextName>
+    <jmxConfigurator/>
+    
+    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+        <!-- encoders are assigned the type
+             ch.qos.logback.classic.encoder.PatternLayoutEncoder by default -->
+        <encoder>
+          <pattern>%d{HH:mm:ss.SSS} [%-5level] [%t] %logger{36} [%file:%line] - %msg%n%ex</pattern>
+        </encoder>
+    </appender>
+    
+	<appender name="file" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>/home/htest/bomnal/logs/batch/batch.log</file>
+		<append>true</append>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>/home/htest/bomnal/logs/batch/batch.%d{yyyy-MM-dd}</fileNamePattern>
+			<maxHistory>7</maxHistory>
+		</rollingPolicy>
+	    <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">			    
+                  <pattern>%d{HH:mm:ss.SSS} [%-5level] [%reqInfo{reqId}] [%file:%line] %msg%n%ex </pattern>
+   		</encoder>
+	</appender>    
+    
+    <appender name="jobLogAppender" class="ch.qos.logback.classic.sift.SiftingAppender">
+        <discriminator>
+            <key>jobId</key>
+            <defaultValue>default</defaultValue>
+        </discriminator>
+        <sift>
+            <appender name="FILE-${jobId}" class="ch.qos.logback.core.rolling.RollingFileAppender">
+                <file>/home/htest/bomnal/logs/batch/services/${jobId}/${jobId}.log</file>
+                <append>true</append>
+                <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+                    <fileNamePattern>/log/batch/services/${jobId}/${jobId}.log.%d{yyyy-MM-dd}</fileNamePattern>
+                    <maxHistory>10</maxHistory>
+                </rollingPolicy>
+                <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">               
+                    <pattern>%d{HH:mm:ss.SSS} [%-5level] %logger{36} - %msg%n%ex</pattern>
+                </encoder>
+            </appender>
+        </sift>
+    </appender> 
+
+    <appender name="ASYNC_JOB_LOG" class="ch.qos.logback.classic.AsyncAppender">
+        <appender-ref ref="jobLogAppender" />
+    </appender>
+        
+    <logger name="jdbc.sql" level="DEBUG"/>
+    <logger name="jdbc.resultset"  level="DEBUG"/>
+    <logger name="org.springframework" level="WARN"/>
+    <logger name="org.apache" level="ERROR"/>
+    <logger name="hone.bom.batch.runtime" level="WARN"/>
+    <logger name="hone.bom.dao.monitor.wrapper" level="WARN"/>
+    <logger name="hone.bom" level="WARN"/>
+    <logger name="io" level="WARN"/>
+    <logger name="org" level="WARN"/>
+    <logger name="com" level="WARN"/>
+    <logger name="org.apache.http" level="DEBUG"/>
+    
+    <root>
+        <level value="DEBUG"/>
+        <appender-ref ref="console"/>
+        <appender-ref ref="file"/>
+        <appender-ref ref="ASYNC_JOB_LOG"/>
+    </root>
+
+    
+</configuration>

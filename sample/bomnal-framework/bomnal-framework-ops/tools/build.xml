@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="Web Project Core Build" basedir="." default="deploy" xmlns:artifact="antlib:org.apache.maven.artifact.ant">
+	<description>
+		<![CDATA[ANT Buile Task]]>
+	</description>
+
+	<path id="maven-ant-tasks.classpath" path="lib/maven-ant-tasks-2.1.3.jar" />
+	<typedef resource="org/apache/maven/artifact/ant/antlib.xml" uri="antlib:org.apache.maven.artifact.ant" classpathref="maven-ant-tasks.classpath" />
+
+	<property file="ant-build.properties" />
+	<property name="source.path" value="../target/honeop"/>
+
+	<!--
+	###############################################
+	# WEB용 공통스크립트 배포
+	###############################################
+	-->
+	<target name="deploy">
+		<antcall target="copy-webapp" />
+	</target>
+	
+	<target name="copy-webapp">
+	        <copy toDir="${webapp.dir}/" overwrite="true" force="true">
+	            <fileset dir="${source.path}/">
+	            </fileset>
+	        </copy>
+	</target>
+
+	
+</project>
