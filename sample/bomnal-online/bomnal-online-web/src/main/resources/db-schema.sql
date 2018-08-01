@@ -15,8 +15,6 @@ CREATE TABLE TBMSG001
 	MSG_TYPE  VARCHAR2(1),
 	DEL_FLAG  VARCHAR2(1)
 );
-<<<<<<< HEAD
-
 
 
 -- for BLOB Example
@@ -52,6 +50,4 @@ BEGIN
      WHERE NO = P_NO;
      
 END IMAGE_ARCHIVING;
-=======
-  
->>>>>>> branch 'master' of https://github.com/ssub91/hone-samples.git
+
