@@ -17,28 +17,33 @@
 	</properties>
 
 	<dependencies>
-        <dependency>
-        	<groupId>hone</groupId>
-        	<artifactId>hone-batch-runtime</artifactId>
-        	<version>${hone.version}</version>
-        </dependency>
-        <dependency>
-        	<groupId>hone</groupId>
-        	<artifactId>hone-batch-support</artifactId>
-        	<version>${hone.version}</version>
-        </dependency>
-        <dependency>
-        	<groupId>bomnal.framework</groupId>
-        	<artifactId>bomnal-framework-batch</artifactId>
-        	<version>${project.version}</version>
-        </dependency>
-        <!--        
+		<dependency>
+			<groupId>hone</groupId>
+			<artifactId>hone-batch-runtime</artifactId>
+			<version>${hone.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>hone</groupId>
+			<artifactId>hone-batch-support</artifactId>
+			<version>${hone.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>bomnal.framework</groupId>
+			<artifactId>bomnal-framework-batch</artifactId>
+			<version>${project.version}</version>
+		</dependency>
 		<dependency>
 			<groupId>bomnal.framework</groupId>
 			<artifactId>bomnal-framework-test</artifactId>
 			<version>${project.version}</version>
 			<scope>test</scope>
 		</dependency>
-		  -->	
+		
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>servlet-api</artifactId>
+			<version>2.5</version>
+		</dependency>
+				
 	</dependencies>
 </project>

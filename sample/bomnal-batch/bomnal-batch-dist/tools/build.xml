@@ -41,11 +41,11 @@
             </fileset>
         </copy>
 		
-        <artifact:mvn pom="../../bomnal-batch-app/pom.xml" mavenHome="/ssub/apache-maven-3.3.9" fork="true">
+        <artifact:mvn pom="../../bomnal-batch-app/pom.xml" mavenHome="/Users/kickscar/Bins/apache-maven-3.3.9" fork="true">
             <arg value="dependency:copy-dependencies"/>
             <arg value="-U"/>
             <arg value="-DincludeScope=runtime"/>
-        	<jvmarg value="-Dmaven.multiModuleProjectDirectory=${maven.home}" />
+        		<jvmarg value="-Dmaven.multiModuleProjectDirectory=${maven.home}" />
         </artifact:mvn>
 		
 		<copy toDir="${batch.home}/BATCH-INF/lib/" overwrite="true" force="true" verbose="true">
