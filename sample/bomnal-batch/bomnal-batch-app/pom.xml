@@ -27,11 +27,18 @@
         	<artifactId>hone-batch-support</artifactId>
         	<version>${hone.version}</version>
         </dependency>
+        <dependency>
+        	<groupId>bomnal.framework</groupId>
+        	<artifactId>bomnal-framework-batch</artifactId>
+        	<version>${project.version}</version>
+        </dependency>
+        <!--        
 		<dependency>
 			<groupId>bomnal.framework</groupId>
 			<artifactId>bomnal-framework-test</artifactId>
 			<version>${project.version}</version>
 			<scope>test</scope>
 		</dependency>
+		  -->	
 	</dependencies>
 </project>

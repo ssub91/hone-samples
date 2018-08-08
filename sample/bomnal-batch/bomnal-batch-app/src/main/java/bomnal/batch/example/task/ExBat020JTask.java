@@ -30,7 +30,7 @@ import bomnal.batch.example.vo.ExCustomerVo;
  *
  */
 public class ExBat020JTask extends AbstractExtendedBatchTasklet {
-
+	
     @SuppressWarnings("rawtypes")
     @Override
     public void doExecute(BatchContext batchContext, ExecutionContext executionContext) throws Exception {
